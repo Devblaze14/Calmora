@@ -3,35 +3,329 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmora</title>
+    <title>Calmora — Your Student Mental Wellness Companion</title>
+    <meta name="description" content="Calmora is a free, AI-powered mental wellness companion for students. Get support, tips, and a safe space to express how you feel.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="chat-container">
-        <!-- Dashboard & Disclaimer Header -->
-        <div class="header">
-            <h2>Calmora 🌱</h2>
-            <div class="disclaimer">
-                <strong>Disclaimer:</strong> I am Calmora, an AI chatbot built by students, for students. I am <em>not</em> a medical professional, therapist, or diagnostic tool. 
-                If you are in crisis, please seek immediate professional help.
+
+    <!-- ════════════════════════════════════════ NAVBAR ════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="nav-logo">
+                <span class="logo-leaf">🌱</span>
+                <span class="logo-text">Calmora</span>
+            </a>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#features" class="nav-link">How It Helps</a></li>
+                <li><a href="#mood" class="nav-link">Mood Check</a></li>
+                <li><a href="#resources" class="nav-link">Resources</a></li>
+                <li><a href="#chat" class="nav-link nav-cta">Talk to Calmora</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ════════════════════════════════════════ HERO ════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-orbs">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        <div class="hero-content reveal">
+            <div class="hero-badge">✦ Free · Confidential · Always Here</div>
+            <h1 class="hero-title">
+                Your mind matters.<br>
+                <span class="hero-gradient">Let's talk about it.</span>
+            </h1>
+            <p class="hero-subtitle">
+                Calmora is a safe, judgment-free companion for students navigating stress, anxiety, and everything in between. You're never alone.
+            </p>
+            <div class="hero-actions">
+                <a href="#chat" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    Start Talking
+                </a>
+                <a href="#features" class="btn btn-ghost">Learn More</a>
+            </div>
+            <div class="hero-trust">
+                <span class="trust-item">🔒 No data stored</span>
+                <span class="trust-divider">·</span>
+                <span class="trust-item">🤖 AI-powered</span>
+                <span class="trust-divider">·</span>
+                <span class="trust-item">📚 Built for students</span>
             </div>
         </div>
-
-        <!-- Scrollable Chat History window -->
-        <div class="chat-box" id="chat-box">
-            <div class="message bot-message">
-                Hi! I'm here to listen. Taking a break from studying? How are you feeling today?
+        <div class="hero-visual reveal reveal-delay-1">
+            <div class="floating-card card-1">
+                <span class="card-emoji">😮‍💨</span>
+                <p>"Feeling so overwhelmed with assignments..."</p>
+            </div>
+            <div class="floating-card card-2">
+                <span class="card-icon">🤖</span>
+                <p>Taking things one step at a time is powerful. What's the first small thing you can do?</p>
+            </div>
+            <div class="floating-card card-3">
+                <span class="card-emoji">💙</span>
+                <p>Crisis support available 24/7</p>
             </div>
         </div>
+        <a href="#features" class="scroll-indicator" aria-label="Scroll down">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+    </section>
 
-        <!-- User text input area -->
-        <div class="input-area">
-            <input type="text" id="user-input" placeholder="Type your message here..." autocomplete="off">
-            <button id="send-btn">Send</button>
+    <!-- ════════════════════════════════════════ FEATURES ════════════════════════════════════════ -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">HOW IT HELPS</span>
+                <h2 class="section-title">Everything you need to feel a little better</h2>
+                <p class="section-subtitle">Calmora combines empathetic AI conversation with proven mental wellness techniques, all in one place.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon" style="--icon-bg: #e8f4ff; --icon-color: #3b82f6;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <h3>Empathetic Listening</h3>
+                    <p>Calmora is trained to respond with compassion and understanding — not judgment. Say whatever you feel, freely.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="--icon-bg: #f0fdf4; --icon-color: #22c55e;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+                    </div>
+                    <h3>Breathing & Grounding</h3>
+                    <p>Get guided breathing exercises and grounding techniques to calm your nervous system — anytime, in seconds.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="--icon-bg: #fdf4ff; --icon-color: #a855f7;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    </div>
+                    <h3>Student-Focused</h3>
+                    <p>Understands exam stress, social pressure, imposter syndrome, and every unique challenge of student life.</p>
+                </div>
+                <div class="feature-card reveal">
+                    <div class="feature-icon" style="--icon-bg: #fff7ed; --icon-color: #f97316;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Crisis-Safe Protocol</h3>
+                    <p>If you ever express thoughts of self-harm, Calmora immediately pivots to provide emergency hotlines and resources.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-1">
+                    <div class="feature-icon" style="--icon-bg: #fef2f2; --icon-color: #ef4444;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Completely Private</h3>
+                    <p>No accounts, no logs, no storage. Your conversations stay between you and Calmora — gone when the session ends.</p>
+                </div>
+                <div class="feature-card reveal reveal-delay-2">
+                    <div class="feature-icon" style="--icon-bg: #ecfdf5; --icon-color: #14b8a6;">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    </div>
+                    <h3>Available 24/7</h3>
+                    <p>Whether it's a 3am breakdown or a mid-afternoon slump — Calmora is always just a message away.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Integrate Frontend logic -->
+    <!-- ════════════════════════════════════════ MOOD CHECK-IN ════════════════════════════════════════ -->
+    <section class="mood-section" id="mood">
+        <div class="mood-bg-wave"></div>
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">MOOD CHECK-IN</span>
+                <h2 class="section-title">How are you feeling right now?</h2>
+                <p class="section-subtitle">Choose the emoji that best describes your mood. We'll offer a helpful tip just for you.</p>
+            </div>
+            <div class="mood-grid reveal">
+                <button class="mood-btn" data-mood="great" data-tip="That's wonderful! Keep that energy going. Consider journaling what's going right today — it can be a powerful mood anchor for harder days. 🌟">
+                    <span class="mood-emoji">😄</span>
+                    <span class="mood-label">Great</span>
+                </button>
+                <button class="mood-btn" data-mood="okay" data-tip="Okay is perfectly fine! Try the 5-4-3-2-1 grounding technique: name 5 things you see, 4 you can touch, 3 you hear, 2 you smell, 1 you taste. 🌿">
+                    <span class="mood-emoji">🙂</span>
+                    <span class="mood-label">Okay</span>
+                </button>
+                <button class="mood-btn" data-mood="meh" data-tip="Feeling 'meh' is totally human. Try a 10-minute walk outside — even just around the building. Natural light genuinely helps reset your mood. ☀️">
+                    <span class="mood-emoji">😐</span>
+                    <span class="mood-label">Meh</span>
+                </button>
+                <button class="mood-btn" data-mood="stressed" data-tip="Let's try a quick breathing reset: breathe in slowly for 4 seconds, hold for 7 seconds, exhale for 8 seconds. Repeat 3–4 times. You've got this. 💨">
+                    <span class="mood-emoji">😰</span>
+                    <span class="mood-label">Stressed</span>
+                </button>
+                <button class="mood-btn" data-mood="sad" data-tip="It's okay to feel sad. Be gentle with yourself today. Reaching out to a friend, counselor, or even Calmora can help. You don't have to carry this alone. 💙">
+                    <span class="mood-emoji">😢</span>
+                    <span class="mood-label">Sad</span>
+                </button>
+                <button class="mood-btn" data-mood="anxious" data-tip="Anxiety can feel overwhelming. Try anchoring yourself: press your feet firmly on the floor, take a slow breath, and remind yourself — right now, in this exact moment, you are safe. 🌊">
+                    <span class="mood-emoji">😖</span>
+                    <span class="mood-label">Anxious</span>
+                </button>
+            </div>
+            <div class="mood-tip-box" id="mood-tip-box">
+                <div class="mood-tip-content" id="mood-tip-text"></div>
+                <a href="#chat" class="btn btn-primary mood-tip-cta" id="mood-tip-cta">Talk to Calmora about it</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════ RESOURCES ════════════════════════════════════════ -->
+    <section class="resources" id="resources">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-badge">RESOURCES</span>
+                <h2 class="section-title">Helpful resources, always within reach</h2>
+                <p class="section-subtitle">If you need professional support, reach out. These services are free, confidential, and available now.</p>
+            </div>
+            <div class="resources-grid">
+                <div class="resource-card crisis reveal">
+                    <div class="resource-header">
+                        <span class="resource-icon">🆘</span>
+                        <span class="resource-tag crisis-tag">Crisis Support</span>
+                    </div>
+                    <h3>National Suicide Prevention Lifeline</h3>
+                    <p>Free, confidential support for people in distress 24/7.</p>
+                    <a href="tel:988" class="resource-link crisis-link">📞 Call or Text 988</a>
+                </div>
+                <div class="resource-card crisis reveal reveal-delay-1">
+                    <div class="resource-header">
+                        <span class="resource-icon">💬</span>
+                        <span class="resource-tag crisis-tag">Crisis Support</span>
+                    </div>
+                    <h3>Crisis Text Line</h3>
+                    <p>Text with a trained crisis counselor for free, anytime.</p>
+                    <a href="sms:741741?body=HOME" class="resource-link crisis-link">📱 Text HOME to 741741</a>
+                </div>
+                <div class="resource-card reveal reveal-delay-2">
+                    <div class="resource-header">
+                        <span class="resource-icon">🎧</span>
+                        <span class="resource-tag">Wellness</span>
+                    </div>
+                    <h3>Headspace for Students</h3>
+                    <p>Guided meditation and mindfulness — free for many universities.</p>
+                    <a href="https://www.headspace.com/students" target="_blank" rel="noopener" class="resource-link">Visit Headspace →</a>
+                </div>
+                <div class="resource-card reveal">
+                    <div class="resource-header">
+                        <span class="resource-icon">🧠</span>
+                        <span class="resource-tag">Self-Help</span>
+                    </div>
+                    <h3>7 Cups of Tea</h3>
+                    <p>Free emotional support from trained listeners and therapists.</p>
+                    <a href="https://www.7cups.com" target="_blank" rel="noopener" class="resource-link">Visit 7 Cups →</a>
+                </div>
+                <div class="resource-card reveal reveal-delay-1">
+                    <div class="resource-header">
+                        <span class="resource-icon">🏫</span>
+                        <span class="resource-tag">Campus</span>
+                    </div>
+                    <h3>Campus Counseling Center</h3>
+                    <p>Most universities offer free counseling sessions to enrolled students.</p>
+                    <p class="resource-action-note">Search: "[Your University] + Counseling Center"</p>
+                </div>
+                <div class="resource-card reveal reveal-delay-2">
+                    <div class="resource-header">
+                        <span class="resource-icon">📖</span>
+                        <span class="resource-tag">Self-Help</span>
+                    </div>
+                    <h3>Mind (UK Mental Health)</h3>
+                    <p>Advice, tips and support for mental health — easy to understand.</p>
+                    <a href="https://www.mind.org.uk" target="_blank" rel="noopener" class="resource-link">Visit Mind →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════ CHAT SECTION ════════════════════════════════════════ -->
+    <section class="chat-section" id="chat">
+        <div class="chat-bg-glow"></div>
+        <div class="section-container chat-layout">
+            <div class="chat-intro reveal">
+                <span class="section-badge">AI COMPANION</span>
+                <h2 class="section-title">Talk to Calmora</h2>
+                <p class="section-subtitle">Tell Calmora what's on your mind. No judgment, no pressure — just a supportive, listening presence.</p>
+                <ul class="chat-features-list">
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Talks about stress, anxiety, and loneliness
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Offers calm, reassuring responses
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        Provides crisis support resources immediately
+                    </li>
+                    <li>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        No data is stored — ever
+                    </li>
+                </ul>
+                <div class="disclaimer-box">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <p><strong>Disclaimer:</strong> Calmora is an AI built by students, not a licensed therapist or medical professional. In an emergency, always contact a real helpline or professional.</p>
+                </div>
+            </div>
+            <div class="chat-widget reveal reveal-delay-1" id="chat-widget">
+                <div class="chat-widget-header">
+                    <div class="chat-widget-avatar">
+                        <span>🌱</span>
+                    </div>
+                    <div class="chat-widget-info">
+                        <span class="chat-widget-name">Calmora</span>
+                        <span class="chat-widget-status"><span class="status-dot"></span> Online</span>
+                    </div>
+                </div>
+                <div class="chat-box" id="chat-box">
+                    <div class="message bot-message">
+                        <div class="msg-avatar">🌱</div>
+                        <div class="msg-content">Hi! I'm Calmora, your personal wellness companion. Taking a break from studying? I'm here to listen. How are you feeling today? 💙</div>
+                    </div>
+                </div>
+                <div class="chat-suggestions" id="chat-suggestions">
+                    <button class="suggestion-chip" onclick="fillSuggestion(this)">I'm feeling stressed 😰</button>
+                    <button class="suggestion-chip" onclick="fillSuggestion(this)">I'm anxious about exams</button>
+                    <button class="suggestion-chip" onclick="fillSuggestion(this)">I feel lonely</button>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="user-input" placeholder="Type how you're feeling..." autocomplete="off" aria-label="Type your message">
+                    <button id="send-btn" aria-label="Send message">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════════════════════════════════════ FOOTER ════════════════════════════════════════ -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <span class="logo-leaf">🌱</span>
+                <span class="logo-text">Calmora</span>
+            </div>
+            <p class="footer-tagline">Built with 💙 by students, for students.</p>
+            <p class="footer-note">Calmora is not a substitute for professional mental health care. If you are in immediate danger, please call emergency services (911 in the US) or your local emergency number.</p>
+            <div class="footer-links">
+                <a href="#hero">Home</a>
+                <a href="#features">How It Helps</a>
+                <a href="#resources">Resources</a>
+                <a href="#chat">Chat</a>
+            </div>
+            <p class="footer-copy">© 2024 Calmora. Made with care. All conversations are private and never stored.</p>
+        </div>
+    </footer>
+
     <script src="/static/script.js"></script>
 </body>
 </html>
