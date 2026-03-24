@@ -11,8 +11,9 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
 ## 🌟 Key Features
 
 - **Friendly Interface**: A calming, responsive chat UI designed with student-friendly aesthetics.
-- **Intent-Based Responses**: Uses simple NLP keyword matching to provide empathetic support for stress, anxiety, and loneliness.
-- **Crisis Detection**: Immediate override logic detects self-harm keywords and redirects users to professional helplines.
+- **AI Therapist Persona**: Powered by an advanced LLM configured to act as an empathetic and professional AI therapist.
+- **1st Class Capabilities**: Specialized explicitly in offering actionable advice for timetable & study planning, exam stress coping mechanisms, and campus resource recommendations.
+- **Crisis Guardrails**: Built-in instructions detect self-harm thoughts and immediately redirect users to professional helplines (988 and 741741).
 - **Privacy Focused**: No permanent storage or database; conversations exist only in session memory.
 - **Mobile Responsive**: Works seamlessly on desktop and mobile devices.
 
@@ -22,7 +23,7 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
 
 - **Frontend**: HTML5, CSS3 (Vanilla), JavaScript (ES6+)
 - **Backend**: Python (Flask)
-- **Logic**: Rule-based Intent Processing (Regex + Weighted Keyword Matching)
+- **Logic**: Advanced LLM-based empathetic conversational engine
 
 ---
 
@@ -41,17 +42,23 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
    cd calmora
    ```
 
-2. **Install dependencies**:
+2. **Set up Environment Variables**:
+   Create a `.env` file in the root directory and configure the underlying API key for the AI engine:
+   ```env
+   GROQ_API_KEY=your_api_key_here
+   ```
+
+3. **Install dependencies**:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. **Run the application**:
+4. **Run the application**:
    ```bash
    python app.py
    ```
 
-4. **Open in your browser**:
+5. **Open in your browser**:
    Navigate to `http://127.0.0.1:5000/`.
 
 ---
@@ -61,9 +68,9 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
 The chatbot follows a "Safety First" architecture:
 
 1. **Input**: User message is sent via AJAX to the Flask `/chat` endpoint.
-2. **Safety Guard**: The backend first checks for `CRISIS_KEYWORDS`. If any match, a `Safety Alert` is returned immediately, bypassing the conversational AI.
-3. **NLP Processing**: If safe, the bot calculates the best-fit "Intent" (Greeting, Stress, Anxiety, Loneliness) based on keyword density.
-4. **Varied Response**: It selects a randomized response from the best-fit category to maintain a natural feel.
+2. **System Guardrails**: The AI engine is initialized with strict instructions to identify crisis situations, prioritizing safety by providing immediate emergency contacts when needed.
+3. **AI Processing**: The bot streams the user context to the LLM backend, heavily guided by an empathetic therapist persona.
+4. **Dynamic Response**: The AI generates a custom, context-aware, and supportive response tailored to the user's concerns.
 
 ---
 
@@ -86,7 +93,7 @@ The chatbot follows a "Safety First" architecture:
 
 - [ ] Support for **Dark Mode** toggle.
 - [ ] Integration with a professional NLP library like `NLTK` or `spaCy`.
-- [ ] Integration with Large Language Models (LLM) via API (e.g., OpenAI, Gemini) with strict system prompting.
+- [x] Upgraded logic engine to an advanced LLM for dynamic, context-aware responses.
 - [ ] Expanded database of campus-specific resources and links.
 
 ---
