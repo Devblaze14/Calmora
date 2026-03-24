@@ -12,7 +12,7 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
 
 - **Friendly Interface**: A calming, responsive chat UI designed with student-friendly aesthetics.
 - **AI Therapist Persona**: Powered by an advanced LLM configured to act as an empathetic and professional AI therapist.
-- **1st Class Capabilities**: Specialized explicitly in offering actionable advice for timetable & study planning, exam stress coping mechanisms, and campus resource recommendations.
+- **Capabilities**: Specialized explicitly in offering actionable advice for timetable & study planning, exam stress coping mechanisms, and campus resource recommendations.
 - **Crisis Guardrails**: Built-in instructions detect self-harm thoughts and immediately redirect users to professional helplines (988 and 741741).
 - **Privacy Focused**: No permanent storage or database; conversations exist only in session memory.
 - **Mobile Responsive**: Works seamlessly on desktop and mobile devices.
