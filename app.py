@@ -6,6 +6,7 @@ from chatbot_logic import (
     get_journal_reflection,
     get_study_breakdown,
     get_affirmation,
+    get_booking_message,
 )
 
 app = Flask(__name__)
@@ -67,6 +68,31 @@ def study():
 @app.route("/api/affirmation", methods=["GET"])
 def affirmation():
     return jsonify({"response": get_affirmation()})
+
+
+@app.route("/api/book", methods=["POST"])
+def book():
+    data = request.json or {}
+    name = (data.get("name") or "").strip()
+    email = (data.get("email") or "").strip()
+    phone = (data.get("phone") or "").strip()
+    concern = (data.get("concern") or "").strip()
+    language = (data.get("language") or "").strip()
+    slot = (data.get("slot") or "").strip()
+
+    if not (name and email and phone and concern):
+        return jsonify({"ok": False, "message": "Please fill in name, email, phone, and your main concern."}), 400
+
+    # In a real product this would persist to a DB, trigger payment + WhatsApp notification.
+    # For now, generate a warm, personalised confirmation message.
+    first_name = name.split()[0]
+    message = get_booking_message(first_name, concern, language, slot)
+    return jsonify({
+        "ok": True,
+        "plan": "Calmora Care",
+        "amount_inr": 599,
+        "message": message,
+    })
 
 
 if __name__ == "__main__":

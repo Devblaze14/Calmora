@@ -204,6 +204,50 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(() => {});
     }
 
+    /* ─── BOOKING ─── */
+    const bookSessionBtn = document.getElementById("book-session-btn");
+    const bookingForm = document.getElementById("booking-form");
+    const bookingSuccess = document.getElementById("booking-success");
+    const bookingSuccessText = document.getElementById("booking-success-text");
+
+    bookSessionBtn?.addEventListener("click", () => {
+        document.getElementById("book")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        setTimeout(() => document.getElementById("book-name")?.focus(), 600);
+    });
+
+    bookingForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const payload = {
+            name: document.getElementById("book-name").value.trim(),
+            email: document.getElementById("book-email").value.trim(),
+            phone: document.getElementById("book-phone").value.trim(),
+            language: document.getElementById("book-language").value,
+            concern: document.getElementById("book-concern").value,
+            slot: document.getElementById("book-slot").value,
+        };
+        const submitBtn = bookingForm.querySelector('button[type="submit"]');
+        const original = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Confirming…";
+        try {
+            const data = await postJSON("/api/book", payload);
+            if (data.ok) {
+                bookingForm.hidden = true;
+                if (bookingSuccessText && data.message) bookingSuccessText.textContent = data.message;
+                bookingSuccess.hidden = false;
+                bookingSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
+            } else {
+                submitBtn.disabled = false;
+                submitBtn.textContent = original;
+                alert(data.message || "Please check your details and try again.");
+            }
+        } catch {
+            submitBtn.disabled = false;
+            submitBtn.textContent = original;
+            alert("We couldn't reach our servers. Please try again in a moment.");
+        }
+    });
+
     /* ─── CHAT ─── */
     const chatBox = document.getElementById("chat-box");
     const userInput = document.getElementById("user-input");
