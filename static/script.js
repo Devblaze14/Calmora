@@ -204,48 +204,120 @@ document.addEventListener("DOMContentLoaded", () => {
             .catch(() => {});
     }
 
-    /* ─── BOOKING ─── */
-    const bookSessionBtn = document.getElementById("book-session-btn");
-    const bookingForm = document.getElementById("booking-form");
-    const bookingSuccess = document.getElementById("booking-success");
-    const bookingSuccessText = document.getElementById("booking-success-text");
+    /* ─── PAYMENT → BOOKING FLOW ───
+       Click a [data-pay-plan] button → Razorpay checkout → on success verify
+       signature server-side → open Cal.com scheduling modal. */
 
-    bookSessionBtn?.addEventListener("click", () => {
-        document.getElementById("book")?.scrollIntoView({ behavior: "smooth", block: "start" });
-        setTimeout(() => document.getElementById("book-name")?.focus(), 600);
-    });
-
-    bookingForm?.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const payload = {
-            name: document.getElementById("book-name").value.trim(),
-            email: document.getElementById("book-email").value.trim(),
-            phone: document.getElementById("book-phone").value.trim(),
-            language: document.getElementById("book-language").value,
-            concern: document.getElementById("book-concern").value,
-            slot: document.getElementById("book-slot").value,
-        };
-        const submitBtn = bookingForm.querySelector('button[type="submit"]');
-        const original = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = "Confirming…";
-        try {
-            const data = await postJSON("/api/book", payload);
-            if (data.ok) {
-                bookingForm.hidden = true;
-                if (bookingSuccessText && data.message) bookingSuccessText.textContent = data.message;
-                bookingSuccess.hidden = false;
-                bookingSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
-            } else {
-                submitBtn.disabled = false;
-                submitBtn.textContent = original;
-                alert(data.message || "Please check your details and try again.");
+    function openCalScheduler() {
+        if (typeof window.Cal === "function") {
+            try {
+                window.Cal.ns["30min"]("modal", {
+                    calLink: "nikhil-0oavvp/30min",
+                    config: { layout: "month_view", theme: "light" },
+                });
+                return true;
+            } catch (e) {
+                console.warn("Cal modal failed, falling back to anchor", e);
             }
-        } catch {
-            submitBtn.disabled = false;
-            submitBtn.textContent = original;
-            alert("We couldn't reach our servers. Please try again in a moment.");
         }
+        // Fallback: jump to the in-page scheduler card
+        document.getElementById("book")?.scrollIntoView({ behavior: "smooth", block: "center" });
+        return false;
+    }
+
+    function showPaymentToast(message, type = "info") {
+        let toast = document.getElementById("pay-toast");
+        if (!toast) {
+            toast = document.createElement("div");
+            toast.id = "pay-toast";
+            toast.className = "pay-toast";
+            document.body.appendChild(toast);
+        }
+        toast.className = `pay-toast pay-toast-${type} visible`;
+        toast.textContent = message;
+        clearTimeout(toast._t);
+        toast._t = setTimeout(() => toast.classList.remove("visible"), 4500);
+    }
+
+    async function startPayment(plan, triggerBtn) {
+        const original = triggerBtn?.innerHTML;
+        if (triggerBtn) {
+            triggerBtn.disabled = true;
+            triggerBtn.innerHTML = "Preparing secure checkout…";
+        }
+        try {
+            const order = await postJSON("/api/create-order", { plan });
+            if (!order || !order.order_id) {
+                throw new Error(order?.error || "Could not create order.");
+            }
+            if (!order.key_id) {
+                throw new Error("Payment is not configured. Please contact support.");
+            }
+            if (typeof window.Razorpay !== "function") {
+                throw new Error("Payment library failed to load. Check your connection and refresh.");
+            }
+
+            const options = {
+                key: order.key_id,
+                amount: order.amount,
+                currency: order.currency,
+                name: "Calmora",
+                description: order.plan_label || "Counselling Session",
+                order_id: order.order_id,
+                theme: { color: "#0f3d2e" },
+                prefill: {
+                    name: "",
+                    email: "",
+                    contact: "",
+                },
+                notes: { plan: order.plan },
+                modal: {
+                    ondismiss: () => {
+                        showPaymentToast("Payment cancelled. You can try again whenever you're ready.", "info");
+                    },
+                },
+                handler: async (response) => {
+                    showPaymentToast("Verifying your payment…", "info");
+                    try {
+                        const verify = await postJSON("/api/verify-payment", {
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                        });
+                        if (verify.ok) {
+                            showPaymentToast("Payment confirmed ✓ Pick your slot now.", "success");
+                            setTimeout(openCalScheduler, 600);
+                        } else {
+                            showPaymentToast(verify.error || "We couldn't verify your payment. Our team will reach out.", "error");
+                        }
+                    } catch {
+                        showPaymentToast("Payment received but verification is delayed. We'll WhatsApp you shortly.", "error");
+                    }
+                },
+            };
+
+            const rzp = new window.Razorpay(options);
+            rzp.on("payment.failed", (resp) => {
+                const desc = resp?.error?.description || "Payment failed. Please try again.";
+                showPaymentToast(desc, "error");
+            });
+            rzp.open();
+        } catch (err) {
+            showPaymentToast(err.message || "Something went wrong. Please try again.", "error");
+        } finally {
+            if (triggerBtn) {
+                triggerBtn.disabled = false;
+                if (original) triggerBtn.innerHTML = original;
+            }
+        }
+    }
+
+    document.querySelectorAll("[data-pay-plan]").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            const plan = btn.getAttribute("data-pay-plan") || "care";
+            startPayment(plan, btn);
+        });
     });
 
     /* ─── CHAT ─── */

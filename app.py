@@ -8,6 +8,13 @@ from chatbot_logic import (
     get_affirmation,
     get_booking_message,
 )
+from payments import create_order, verify_signature, get_public_key_id
+
+# Pricing for Calmora plans (in paise)
+PLAN_PRICES = {
+    "care": {"amount": 59900, "label": "Calmora Care · Single Session"},
+    "plus": {"amount": 199900, "label": "Calmora Plus · 4 Sessions"},
+}
 
 app = Flask(__name__)
 
@@ -68,6 +75,66 @@ def study():
 @app.route("/api/affirmation", methods=["GET"])
 def affirmation():
     return jsonify({"response": get_affirmation()})
+
+
+@app.route("/api/razorpay-key", methods=["GET"])
+def razorpay_key():
+    """Expose only the publishable key id to the frontend."""
+    return jsonify({"key_id": get_public_key_id()})
+
+
+@app.route("/api/create-order", methods=["POST"])
+def create_order_route():
+    data = request.json or {}
+    plan = (data.get("plan") or "care").strip().lower()
+
+    if plan in PLAN_PRICES:
+        amount = PLAN_PRICES[plan]["amount"]
+        label = PLAN_PRICES[plan]["label"]
+    else:
+        # Fall back to a client-supplied amount, clamped to a sane range
+        amount = int(data.get("amount") or 0)
+        label = "Calmora session"
+
+    if amount < 100:
+        return jsonify({"error": "Amount must be at least 100 paise (₹1)."}), 400
+
+    notes = {
+        "plan": plan,
+        "plan_label": label,
+        "name": data.get("name") or "",
+        "email": data.get("email") or "",
+        "phone": data.get("phone") or "",
+    }
+    status, payload = create_order(amount_paise=amount, currency="INR", notes=notes)
+    if status != 200:
+        return jsonify(payload), status
+
+    payload["plan"] = plan
+    payload["plan_label"] = label
+    payload["key_id"] = get_public_key_id()
+    return jsonify(payload), 200
+
+
+@app.route("/api/verify-payment", methods=["POST"])
+def verify_payment_route():
+    data = request.json or {}
+    order_id = (data.get("razorpay_order_id") or "").strip()
+    payment_id = (data.get("razorpay_payment_id") or "").strip()
+    signature = (data.get("razorpay_signature") or "").strip()
+
+    if not (order_id and payment_id and signature):
+        return jsonify({"ok": False, "error": "Missing payment fields."}), 400
+
+    if not verify_signature(order_id, payment_id, signature):
+        return jsonify({"ok": False, "error": "Signature mismatch — payment not verified."}), 400
+
+    return jsonify({
+        "ok": True,
+        "message": "Payment verified. Please pick a slot on the next screen.",
+        "payment_id": payment_id,
+        "order_id": order_id,
+    }), 200
 
 
 @app.route("/api/book", methods=["POST"])
