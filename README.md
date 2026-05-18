@@ -4,7 +4,7 @@
 [![Flask](https://img.shields.io/badge/flask-3.0.0-green.svg)](https://flask.palletsprojects.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A lightweight, empathetic, and safety-first mental health companion designed specifically for college students. Built with **Python (Flask)** and **Vanilla Web Technologies (HTML/CSS/JS)**, this project focuses on learning, accessibility, and immediate crisis support.
+A lightweight, empathetic, and safety-first mental health companion designed specifically for Indian college students. Built with **Python (Flask)** and **Vanilla Web Technologies (HTML/CSS/JS)**, this project focuses on learning, accessibility, and immediate crisis support.
 
 ---
 
@@ -13,7 +13,7 @@ A lightweight, empathetic, and safety-first mental health companion designed spe
 - **Friendly Interface**: A calming, responsive chat UI designed with student-friendly aesthetics.
 - **AI Therapist Persona**: Powered by an advanced LLM configured to act as an empathetic and professional AI therapist.
 - **Capabilities**: Specialized explicitly in offering actionable advice for timetable & study planning, exam stress coping mechanisms, and campus resource recommendations.
-- **Crisis Guardrails**: Built-in instructions detect self-harm thoughts and immediately redirect users to professional helplines (988 and 741741).
+- **Crisis Guardrails**: Built-in instructions detect self-harm thoughts and immediately redirect users to professional Indian helplines (KIRAN 1800-599-0019, AASRA 9820-466-726, etc.).
 - **Privacy Focused**: No permanent storage or database; conversations exist only in session memory.
 - **Mobile Responsive**: Works seamlessly on desktop and mobile devices.
 
@@ -77,7 +77,7 @@ The chatbot follows a "Safety First" architecture:
 ## ⚠️ Important Disclaimer
 
 > [!WARNING]
-> This chatbot is an **educational project** and is NOT a substitute for professional medical advice, diagnosis, or treatment. It is intended to provide general support and stress-relief tips for students. If you are in immediate danger or experiencing a medical emergency, please contact professional emergency services or your local campus security.
+> This chatbot is an **educational project** and is NOT a substitute for professional medical advice, diagnosis, or treatment. It is intended to provide general support and stress-relief tips for students. If you are in immediate danger or experiencing a medical emergency, please contact professional emergency services (like 112) or your local campus security.
 
 ---
 
