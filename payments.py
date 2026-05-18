@@ -6,7 +6,15 @@ import os
 import uuid
 
 import razorpay
-from razorpay.errors import BadRequestError, SignatureVerificationError
+
+# Razorpay's exception classes have lived in different places across versions
+# (razorpay.errors.*, razorpay.*). Resolve them defensively so the module
+# imports cleanly on any 1.x release.
+try:
+    from razorpay.errors import BadRequestError, SignatureVerificationError  # type: ignore
+except Exception:  # noqa: BLE001
+    BadRequestError = getattr(razorpay, "BadRequestError", Exception)
+    SignatureVerificationError = getattr(razorpay, "SignatureVerificationError", Exception)
 
 
 def _credentials():
