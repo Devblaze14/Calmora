@@ -1,5 +1,7 @@
 # Environments
 .env
+.env.*
+!.env.example
 .venv
 env/
 venv/
@@ -11,10 +13,24 @@ __pycache__/
 *$py.class
 *.so
 .Python
+*.pyc
 
 # Flask
 instance/
 .webassets-cache
+flask_session/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Migrations (local artifacts)
+migrations/versions/__pycache__/
+
+# Logs
+*.log
+logs/
 
 # Distribution / packaging
 build/
@@ -35,11 +51,21 @@ share/python-wheels/
 *.egg
 MANIFEST
 
+# Testing / coverage
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.cache
+
 # IDEs / Editors
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
 
 # OS generated files
 .DS_Store
@@ -49,3 +75,18 @@ MANIFEST
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini
+
+# Node (if any frontend tooling)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vercel
+.vercel
+
+# Secrets / keys
+*.pem
+*.key
+secrets.json

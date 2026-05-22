@@ -40,7 +40,7 @@
                 <li><a href="#resources" class="nav-link">Resources</a></li>
             </ul>
             <div class="nav-actions">
-                <a href="#chat" class="btn btn-ghost btn-sm">Sign In</a>
+                <button id="auth-trigger" class="btn btn-ghost btn-sm" data-mode="in">Sign In</button>
                 <button class="btn btn-primary btn-sm" data-pay-plan="care">Book · ₹599</button>
             </div>
             <button class="hamburger" id="hamburger" aria-label="Menu">
@@ -558,6 +558,11 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
     </a>
 
+    <!-- ═════ AUTH MODAL ROOT ═════ -->
+    <div id="auth-modal-root"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/static/auth.js"></script>
     <script src="/static/script.js"></script>
 </body>
 </html>

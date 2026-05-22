@@ -49,12 +49,24 @@ document.addEventListener("DOMContentLoaded", () => {
             .replace(/\n/g, "<br>");
     };
 
+    function authHeaders() {
+        const headers = { "Content-Type": "application/json" };
+        const token = window.CalmoraAuth?.getToken?.();
+        if (token) headers["Authorization"] = `Bearer ${token}`;
+        return headers;
+    }
+
     async function postJSON(url, payload) {
         const r = await fetch(url, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: authHeaders(),
             body: JSON.stringify(payload || {}),
         });
+        return r.json();
+    }
+
+    async function getJSON(url) {
+        const r = await fetch(url, { headers: authHeaders() });
         return r.json();
     }
 
